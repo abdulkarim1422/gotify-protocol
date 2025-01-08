@@ -7,7 +7,7 @@ load_dotenv()
 # Access environment variables
 
 # Gotify
-GOTIFY_DOMAIN = os.getenv('MAIN_DOMAIN')
+GOTIFY_URL = os.getenv('GOTIFY_URL')
 GOTIFY_ADMIN_TOKEN = os.getenv('GOTIFY_ADMIN_TOKEN') # must be stable token
 
 # DB
