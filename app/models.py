@@ -28,4 +28,4 @@ class App(SQLModel, table=True):
     project_id: str
     created_at: datetime = Field(default=datetime.now())
     updated_at: datetime = Field(default=datetime.now())
-    token: str
+    app_token: str
