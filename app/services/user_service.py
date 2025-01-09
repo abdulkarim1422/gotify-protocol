@@ -1,6 +1,7 @@
 from app.repositories import user_repo
 from app.services import gotify
 from app import models
+import uuid
 
 def create_and_store_user(username, password):
     # create user in gotify
@@ -10,7 +11,7 @@ def create_and_store_user(username, password):
     client_token = create_client_for_user(username=username, password=password)
 
     # store user in db
-    user = models.User(username=username, password=password, client_token=client_token)
+    user = models.User(id=uuid.uuid4(), username=username, password=password, client_token=client_token)
     user_repo.create_user(user)
 
     return user
@@ -51,7 +52,6 @@ def check_and_update_user(username):
         user = gotify.user.create_user(username=username, password=username)
         # store user in db
         client_token = create_client_for_user(username=username, password=username)
-        user = models.User(username=username, password=username, client_token=client_token)
+        user = models.User(id=uuid.uuid4(), username=username, password=username, client_token=client_token)
         user_repo.create_user(user)
         return user
-
