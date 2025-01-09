@@ -23,5 +23,10 @@ def check_app(username, app_name):
     user_apps = app_repo.get_apps_by_user_id(user.id)
     app = next((app for app in user_apps if app.name == app_name), None)
     if not app:
-        app = create_app(username, app_name)
+        # try searching for the app in the gotify server
+        user_apps = gotify.application.get_all_apps(user.client_token)
+        app = next((app for app in user_apps if app["name"] == app_name), None)
+        if not app:
+            # create the app
+            app = create_app(username, app_name)
     return app
