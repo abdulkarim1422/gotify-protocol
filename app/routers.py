@@ -22,6 +22,6 @@ async def create_notification(request: Request):
     content = request.query_params.get("content")
     if not username or not title or not content:
         return {"error": "Missing required query parameters"}
-    await notification_service.send_notification(username, title, content, projectname)
+    await notification_service.send_notification(username, projectname, title, content)
     return {"message": "Notification sent successfully"}
 
