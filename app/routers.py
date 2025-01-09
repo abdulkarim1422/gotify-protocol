@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from fastapi import Request
-from app.services import send_notification, user_services
+from app.services import user_service, notification_service
 
 router = APIRouter()
 
@@ -10,7 +10,7 @@ async def create_user(request: Request):
     password = request.query_params.get("password")
     if not username or not password:
         return {"error": "Missing required query parameters"}
-    user = user_services.create_and_store_user(username, password)
+    user = user_service.create_and_store_user(username, password)
     return user.model_dump()
 
 
@@ -21,6 +21,6 @@ async def create_notification(request: Request):
     content = request.query_params.get("content")
     if not username or not title or not content:
         return {"error": "Missing required query parameters"}
-    await send_notification(username, title, content)
+    await notification_service.send_notification(username, title, content)
     return {"message": "Notification sent successfully"}
 
