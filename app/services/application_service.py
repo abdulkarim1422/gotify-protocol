@@ -18,3 +18,10 @@ def create_app(username, app_name):
     
     return app
 
+def check_app(username, app_name):
+    user = user_service.get_user_by_username(username)
+    user_apps = app_repo.get_apps_by_user_id(user.id)
+    app = next((app for app in user_apps if app.name == app_name), None)
+    if not app:
+        app = create_app(username, app_name)
+    return app
