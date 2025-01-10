@@ -2,7 +2,7 @@ from app.services import gotify
 from app.services import user_service
 from app import models
 from app.repositories import app_repo
-from app.repositories import user_repo
+import uuid
 
 def create_app(username, app_name):
     # get user token from db
@@ -16,7 +16,7 @@ def create_app(username, app_name):
     user = user_service.get_user_by_username(username)
 
     # store app in db
-    app = models.App(name=app_name, user_id=user.id, app_token=app_token)
+    app = models.App(id=uuid.uuid4(), name=app_name, user_id=user.id, app_token=app_token)
     app_repo.create_app(app)
     
     return app
