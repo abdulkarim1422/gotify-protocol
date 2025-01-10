@@ -1,6 +1,6 @@
 start:
-	nohup uvicorn app.main:app --reload --port 3001 &
-	echo "Uvicorn app started on port 3001."
+	nohup uvicorn app.main:app --reload --port 3094 &
+	echo "Uvicorn app started on port 3094."
 
 
 stop:
